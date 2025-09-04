@@ -1,100 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Earn Free Coins</title>
-
-  <!-- Social Media Preview -->
-  <meta property="og:title" content="🎉 Earn Free Coins">
-  <meta property="og:description" content="Download the app using this referral code and get bonus coins instantly!">
-  <meta property="og:image" content="https://yourdomain.com/logo.png">
-  <meta property="og:url" content="https://yourdomain.com">
-
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: "Poppins", sans-serif;
       background: linear-gradient(135deg, #6a11cb, #2575fc);
       color: white;
+      margin: 0;
+      padding: 0;
       text-align: center;
     }
-    .container {
+
+    header {
       padding: 20px;
     }
+
     h1 {
-      font-size: 2rem;
-      margin-top: 40px;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
     }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
     .card {
       background: white;
       color: #333;
       border-radius: 20px;
       padding: 20px;
-      max-width: 420px;
       margin: 30px auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      max-width: 420px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
     }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #6a11cb;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin: 15px 0;
+    }
+
     .ref-code {
       font-size: 1.4rem;
       font-weight: bold;
       color: #ff5722;
       background: #fff3e0;
-      padding: 8px 12px;
+      padding: 6px 12px;
       border-radius: 8px;
       display: inline-block;
     }
+
     .btn {
       display: inline-block;
-      padding: 12px 24px;
+      padding: 14px 28px;
       margin-top: 20px;
       font-size: 1.1rem;
       font-weight: bold;
       color: white;
       background: linear-gradient(90deg, #ff6f61, #ff3d00);
-      border-radius: 10px;
+      border-radius: 12px;
       text-decoration: none;
+      transition: 0.3s;
     }
+
     .btn:hover {
       background: linear-gradient(90deg, #ff3d00, #ff6f61);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎉 Earn Free Coins</h1>
-    <p>Install our app and get bonus coins instantly!</p>
+  <header>
+    <h1>🎉 Earn Free Coins!</h1>
+    <p class="subtitle">Download our app and get instant rewards.</p>
+  </header>
 
-    <div class="card">
-      <p>Your Referral Code:</p>
-      <div class="ref-code" id="refCode">LOADING...</div>
-
-      <p style="margin-top: 20px;">Click the button below to download:</p>
-      <a id="downloadBtn" class="btn" href="#">📥 Download App</a>
-    </div>
+  <div class="card">
+    <h2>🔥 Special Offer for You</h2>
+    <p>Use this referral code and earn bonus coins:</p>
+    <div class="ref-code" id="refCode">ABC123</div>
+    <p style="margin-top: 20px;">
+      Click below to download the app and your referral code will be auto-filled.
+    </p>
+    <a id="downloadBtn" class="btn" href="https://github.com/vikas0768/Download/releases/download/v1.0.0/Movielink.apk">
+      📥 Download App
+    </a>
   </div>
 
+  <footer>
+    © 2025 MovieLink • All rights reserved
+  </footer>
+
   <script>
-    // Extract referral code from URL path
-    const refCode = window.location.pathname.split("/").pop();
-    document.getElementById('refCode').innerText = refCode;
+    // Extract referral code from link
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
 
-    // GitHub APK Direct Link
-    const githubApkLink = "https://github.com/vikas0768/Download/releases/download/v1.0.0/Movielink.apk";
-
-    // Deep link to open the app directly (if installed)
-    const deepLink = "movielink://referral?code=" + refCode;
-
-    window.onload = function() {
-      // Try to open the app automatically
-      setTimeout(() => {
-        window.location.href = deepLink;
-      }, 100);
-
-      // If app is not installed, download APK directly from GitHub
-      document.getElementById('downloadBtn').href = githubApkLink + "?ref=" + refCode;
-    };
+    if (ref) {
+      document.getElementById('refCode').innerText = ref;
+      document.getElementById('downloadBtn').href =
+        "https://github.com/vikas0768/Download/releases/download/v1.0.0/Movielink.apk?ref=" + ref;
+    }
   </script>
-
-</body></html>
+</body>
+</html>
+  
