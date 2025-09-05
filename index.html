@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,17 +108,32 @@
   <script>
     // ---- Referral Code Extract Logic ----
 
-    // 1️⃣ Pehle query parameter (?ref=XYZ) check karo
-    const urlParams = new URLSearchParams(window.location.search);
-    let refCode = urlParams.get('ref');
+    function getReferralCode() {
+      // 1️⃣ First check query parameter (?ref=XYZ)
+      const urlParams = new URLSearchParams(window.location.search);
+      let refCode = urlParams.get('ref');
 
-    // 2️⃣ Agar query parameter me nahi mila, to URL ke last part se nikaalo (/r/XYZ)
-    if (!refCode) {
-      const pathParts = window.location.pathname.split('/');
-      refCode = pathParts[pathParts.length - 1] || null;
+      // 2️⃣ If not found, check hash route (#/r/XYZ)
+      if (!refCode && window.location.hash) {
+        const hash = window.location.hash; // Example: #/r/ABC123
+        if (hash.startsWith("#/r/")) {
+          refCode = hash.split("/")[2]; // "ABC123"
+        }
+      }
+
+      // 3️⃣ If still not found, check last part of pathname (/r/XYZ)
+      if (!refCode) {
+        const pathParts = window.location.pathname.split('/');
+        refCode = pathParts[pathParts.length - 1] || null;
+      }
+
+      return refCode;
     }
 
-    // 3️⃣ Referral code ko page par set karo aur APK link update karo
+    // Get referral code
+    const refCode = getReferralCode();
+
+    // 4️⃣ Update UI and download button dynamically
     if (refCode) {
       document.getElementById('refCode').innerText = refCode;
       document.getElementById('downloadBtn').href =
