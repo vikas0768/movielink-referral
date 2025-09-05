@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,16 +107,24 @@
   </footer>
 
   <script>
-    // Extract referral code from link
-    const urlParams = new URLSearchParams(window.location.search);
-    const ref = urlParams.get('ref');
+    // ---- Referral Code Extract Logic ----
 
-    if (ref) {
-      document.getElementById('refCode').innerText = ref;
+    // 1️⃣ Pehle query parameter (?ref=XYZ) check karo
+    const urlParams = new URLSearchParams(window.location.search);
+    let refCode = urlParams.get('ref');
+
+    // 2️⃣ Agar query parameter me nahi mila, to URL ke last part se nikaalo (/r/XYZ)
+    if (!refCode) {
+      const pathParts = window.location.pathname.split('/');
+      refCode = pathParts[pathParts.length - 1] || null;
+    }
+
+    // 3️⃣ Referral code ko page par set karo aur APK link update karo
+    if (refCode) {
+      document.getElementById('refCode').innerText = refCode;
       document.getElementById('downloadBtn').href =
-        "https://github.com/vikas0768/Download/releases/download/v1.0.0/Movielink.apk?ref=" + ref;
+        "https://github.com/vikas0768/Download/releases/download/v1.0.0/Movielink.apk?ref=" + refCode;
     }
   </script>
 </body>
 </html>
-  
